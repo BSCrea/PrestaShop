@@ -148,9 +148,11 @@ function smartyHook($params, &$smarty)
         $modules = Hook::getHookModuleExecList($hook_params['h']);
 
         $moduleexcl = explode(',', $params['excl']);
-        foreach ($modules as $module) {
-            if (!in_array($module['module'], $moduleexcl)) {
-                $result .= Hook::exec($params['h'], $hook_params, $module['id_module']);
+        if ($modules) {
+            foreach ($modules as $module) {
+                if (!in_array($module['module'], $moduleexcl)) {
+                    $result .= Hook::exec($params['h'], $hook_params, $module['id_module']);
+                }
             }
         }
 
